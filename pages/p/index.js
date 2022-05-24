@@ -58,17 +58,17 @@ const Create = () => {
       network,
     };
 
-    const post = await fetch("http://localhost:5556/api/alphatwt", {
+    const post = await fetch("/api/alphatwt", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         alphatwt,
-        userCode: signer, //. this identifies the user - returned back from Unlock as auth for user
+        signer, //. this identifies the user - returned back from Unlock as auth for user
       }),
     });
-    console.log("redirect to post page, based on its id.");
+    console.log("redirect to post page, based on its id", post);
   };
 
   const connectWallet = async (e) => {

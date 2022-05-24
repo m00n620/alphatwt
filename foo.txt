@@ -1,0 +1,3 @@
+https://app.unlock-protocol.com/checkout?client_id=ouvre-boite.com&redirect_uri=https://ouvre-boite.com/
+
+https://app.unlock-protocol.com/checkout?client_id=localhost:3000&redirect_uri=http://localhost:3000/p

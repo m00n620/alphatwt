@@ -10,13 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model AlphaTwt {
   id                Int     @default(autoincrement()) @id
   title             String
   preview           String
   content           String
   published         Boolean @default(false)
-  creator           String    
-  paywallConfig     Json[]
+  creator            User?   @relation(fields: [creatorId], references: [id])
+  creatorId          Int
+}
+
+model User {
+  id            Int       @default(autoincrement()) @id
+  name          String?
+  email         String?   @unique
+  createdAt     DateTime  @default(now()) @map(name: "created_at")
+  updatedAt     DateTime  @updatedAt @map(name: "updated_at")
+  alphatwts     AlphaTwt[]
+  @@map(name: "users")
 }

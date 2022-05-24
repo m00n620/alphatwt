@@ -1,16 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
-import Head from "next/head";
 import { useForm, Controller } from "react-hook-form";
+import { useRouter } from "next/router";
+import { ethers } from "ethers";
+import Head from "next/head";
 import Image from "next/image";
 import Link from "next/link";
-import styles from "../../styles/Home.module.css";
-import Router from "next/router";
 import Select from "react-select";
-import { ethers } from "ethers";
-import Web3Modal from "web3modal";
-import { createUnparsedSourceFile } from "typescript";
-import { hashCode } from "./../../lib/utils";
 import atob from "atob";
+import styles from "../../styles/Home.module.css";
 
 const networks = [
   {

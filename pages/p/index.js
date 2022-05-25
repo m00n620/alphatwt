@@ -8,6 +8,7 @@ import Link from "next/link";
 import Select from "react-select";
 import atob from "atob";
 import styles from "../../styles/Home.module.css";
+import { AuthContext } from "../_app";
 
 const networks = [
   {
@@ -29,22 +30,16 @@ const networks = [
 ];
 
 const Create = () => {
-  const [signer, setSigner] = useState(null);
+  const code = useContext(AuthContext);
+  const [route, setRoute] = useState();
   const { register, handleSubmit, control } = useForm();
+  const router = useRouter();
 
   // useContext;
 
-  useEffect(() => {
-    const urlSearchParams = new URLSearchParams(window.location.search);
-    const params = Object.fromEntries(urlSearchParams.entries());
-    const code = params.code && JSON.parse(atob(params.code));
-    // The code object has 2 properties:
-    // d: digest (the signed string)
-    // s: signature (the signature)
-    const address = code && ethers.utils.verifyMessage(code.d, code.s);
-
-    setSigner(address);
-  }, []);
+  // useEffect(() => {
+  //   router.push(`/p/:id`);
+  // }, [router]);
 
   const onSubmit = async ({ title, preview, content, lock, network }) => {
     const alphatwt = {
@@ -62,7 +57,7 @@ const Create = () => {
       },
       body: JSON.stringify({
         alphatwt,
-        signer, //. this identifies the user - returned back from Unlock as auth for user
+        code, //. this identifies the user - returned back from Unlock as auth for user
       }),
     });
     console.log("redirect to post page, based on its id", post);
@@ -83,12 +78,12 @@ const Create = () => {
       </Head>
 
       <main className={styles.main}>
-        {!signer && (
+        {!code && (
           <p>
             <button onClick={connectWallet}>Connect your wallet!</button>
           </p>
         )}
-        {signer && (
+        {code && (
           <form onSubmit={handleSubmit(onSubmit)}>
             <p>
               <label>

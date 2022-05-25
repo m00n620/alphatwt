@@ -8,11 +8,13 @@ export default async function handle(req, res) {
   try {
     console.log("hit the api");
 
-    const { alphatwt, signer } = req.body;
+    const { alphatwt, code } = req.body;
     // TODO: if no alphatwt or signer throw error
-
-    // const code = JSON.parse(atob(userCode));
-    // const creator = ethers.utils.verifyMessage(code.d, code.s);
+    const auth = JSON.parse(atob(code));
+    // The code object has 2 properties:
+    // d: digest (the signed string)
+    // s: signature (the signature)
+    const signer = ethers.utils.verifyMessage(auth.d, auth.s);
 
     const result = await prisma.alphaTwt.create({
       data: {

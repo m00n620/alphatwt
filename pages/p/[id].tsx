@@ -23,7 +23,11 @@ export default function AlphaTwt(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>{props.title}</main>
+      <div className={styles.main}>
+        <h1>{props.title}</h1>
+        <h2>{props.preview}</h2>
+        <h2>{props.content}</h2>
+      </div>
     </div>
   );
 }

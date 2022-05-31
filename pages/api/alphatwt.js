@@ -1,32 +1,32 @@
-import prisma from '../../lib/prisma';
 import { ethers } from "ethers";
-import { hashCode } from './../../lib/utils'
+import atob from "atob";
+import prisma from "../../lib/prisma";
 
 export default async function handle(req, res) {
-    const { alphatwt, signature, message } = req.body
-    const payload = JSON.stringify(alphatwt);
-    const creator = await ethers.utils.verifyMessage(message, signature)
-    const [_, hash, time] = message.split('\n')
-    const hashValue = hash.match(/Hash: (.*)/)
-    const timeValue = time.match(/Time: (.*)/)
-    if (hashCode(payload) !== parseInt(hashValue[1], 10)) {
-        return res.json({
-            error: "bad payload"
-        })
-    }
-    if (new Date().getTime() - new Date(timeValue[1]).getTime() - new Date > 1000 * 60) {
-        return res.json({
-            error: "payload too old!"
-        })
-    }
+  try {
+    const { alphatwt, code } = req.body;
+    // TODO: if no alphatwt or signer throw error
+    const auth = JSON.parse(atob(code));
+    // The code object has 2 properties:
+    // d: digest (the signed string)
+    // s: signature (the signature)
+    const signer = ethers.utils.verifyMessage(auth.d, auth.s);
+
     const result = await prisma.alphaTwt.create({
-        data: {
-            ...alphatwt,
-            creator,
-            published: true,
-        },
+      data: {
+        ...alphatwt,
+        signer,
+        published: true,
+      },
     });
     res.json({
-        hello: 'world'
+      result,
+      success: "true",
     });
+  } catch (e) {
+    res.json({
+      e,
+      message: e.message,
+    });
+  }
 }

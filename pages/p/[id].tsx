@@ -14,7 +14,6 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 export default function AlphaTwt(props) {
-  console.log(props);
   return (
     <div className={styles.container}>
       <Head>
@@ -23,7 +22,11 @@ export default function AlphaTwt(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className={styles.main}>{props.title}</main>
+      <div className={styles.main}>
+        <h1>{props.title}</h1>
+        <h2>{props.preview}</h2>
+        <h2>{props.content}</h2>
+      </div>
     </div>
   );
 }

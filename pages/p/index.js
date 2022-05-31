@@ -9,8 +9,6 @@ import Select from "react-select";
 import atob from "atob";
 import styles from "../../styles/Home.module.css";
 import { AuthContext } from "../_app";
-import alphaTwt from "./[id]";
-import useSWR from "swr";
 
 const networks = [
   {

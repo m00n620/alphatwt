@@ -14,7 +14,6 @@ export const getServerSideProps = async ({ params }) => {
 };
 
 export default function AlphaTwt(props) {
-  console.log(props);
   return (
     <div className={styles.container}>
       <Head>

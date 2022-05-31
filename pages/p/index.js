@@ -9,6 +9,8 @@ import Select from "react-select";
 import atob from "atob";
 import styles from "../../styles/Home.module.css";
 import { AuthContext } from "../_app";
+import alphaTwt from "./[id]";
+import useSWR from "swr";
 
 const networks = [
   {
@@ -35,11 +37,10 @@ const Create = () => {
   const { register, handleSubmit, control } = useForm();
   const router = useRouter();
 
-  // useContext;
-
-  // useEffect(() => {
-  //   router.push(`/p/:id`);
-  // }, [router]);
+  // const fetcher = (...args) => fetch(...args).then((res) => res.json());
+  // const { data, error } = useSWR(`/api/${id}`, fetcher);
+  // if (error) return <div>failed to load</div>;
+  // if (!data) return <div>loading...</div>;
 
   const onSubmit = async ({ title, preview, content, lock, network }) => {
     const alphatwt = {
@@ -60,7 +61,20 @@ const Create = () => {
         code, //. this identifies the user - returned back from Unlock as auth for user
       }),
     });
-    console.log("redirect to post page, based on its id", post);
+
+    const result = post.body;
+    const reader = result.getReader();
+
+    reader.read().then(({ done, value }) => {
+      if (value) {
+        const decoder = new TextDecoder();
+        const body = decoder.decode(value);
+        const bodyParsed = JSON.parse(body);
+        const id = bodyParsed.result.id;
+
+        router.push(`/p/${id}`);
+      }
+    });
   };
 
   const connectWallet = async (e) => {

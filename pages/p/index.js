@@ -59,20 +59,22 @@ const Create = () => {
         code, //. this identifies the user - returned back from Unlock as auth for user
       }),
     });
+    const json = await post.json()
+    console.log(json)
 
-    const result = post.body;
-    const reader = result.getReader();
+    // const result = post.body;
+    // const reader = result.getReader();
 
-    reader.read().then(({ done, value }) => {
-      if (value) {
-        const decoder = new TextDecoder();
-        const body = decoder.decode(value);
-        const bodyParsed = JSON.parse(body);
-        const id = bodyParsed.result.id;
+    // reader.read().then(({ done, value }) => {
+    //   if (value) {
+    //     const decoder = new TextDecoder();
+    //     const body = decoder.decode(value);
+    //     const bodyParsed = JSON.parse(body);
+    //     const id = bodyParsed.result.id;
 
-        router.push(`/p/${id}`);
-      }
-    });
+    //     router.push(`/p/${id}`);
+    //   }
+    // });
   };
 
   const connectWallet = async (e) => {

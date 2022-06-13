@@ -17,6 +17,7 @@ async function handle(req, res) {
       success: "true",
     });
   } catch (e) {
+    console.error(e);
     res.json({
       e,
       message: e.message,

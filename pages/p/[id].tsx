@@ -5,7 +5,7 @@ import { useEffect, useContext, useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import { AuthContext } from "../../lib/contexts/auth";
 import ConnectWallet from "../../Components/ConnectWallet";
-import useAlphaTwt, { get } from "../../lib/hooks/useAlphaTwt";
+import useAlphaTwt from "../../lib/hooks/useAlphaTwt";
 import UnlockIt from "../../Components/UnlockIt";
 import Template from "../../Components/Template";
 import getSigner from "../../lib/getSigner";
@@ -81,6 +81,7 @@ const AlphaTwt = (props) => {
       showLeft={false}
       title={post?.title}
       extraHead={<MetadataPreview post={post} />}
+      extraLink={null}
     >
       {post && (
         <article>

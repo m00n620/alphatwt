@@ -23,6 +23,7 @@ const Archive = () => {
 
   return (
     <Template
+      extraHead={null}
       title="Archive"
       showLeft={true}
       extraLink={<Link href={"/"}>Post new Tweet</Link>}

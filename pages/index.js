@@ -56,7 +56,7 @@ const Home = () => {
 
 
   return (
-    <Template showLeft extraLink={<Link href={"/archive"}>previous alphatweets</Link>}>
+    <Template showLeft extraHead={null} extraLink={<Link href={"/archive"}>previous alphatweets</Link>}>
       {!code && <ConnectWallet />}
       {code && (
         <form onSubmit={handleSubmit(onSubmit)}>

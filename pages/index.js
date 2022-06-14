@@ -3,12 +3,14 @@ import { useForm, Controller } from "react-hook-form";
 import { useRouter } from "next/router";
 import { ethers } from "ethers";
 import Select from "react-select";
-import Link from 'next/link'
-import Template from '../Components/Template'
+import Link from "next/link";
+import Template from "../Components/Template";
+import { Grid } from "@mui/material";
+import Image from "next/image";
 
 import { AuthContext } from "../lib/contexts/auth";
 import ConnectWallet from "../Components/ConnectWallet";
-import useAlphaTwt from "../lib/hooks/useAlphaTwt"
+import useAlphaTwt from "../lib/hooks/useAlphaTwt";
 import MenuBar from "../Components/MenuBar";
 
 const networks = [
@@ -32,7 +34,7 @@ const networks = [
 
 const Home = () => {
   const { code } = useContext(AuthContext);
-  const { create } = useAlphaTwt()
+  const { create } = useAlphaTwt();
   const [route, setRoute] = useState();
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
@@ -40,32 +42,87 @@ const Home = () => {
       preview: "This is the preview text",
       content: "This is the content",
       network: networks[0].value,
-      lock: '0xAF55e472Dc785f1613a346246E5B271Bf233219E'
-    }
+      lock: "0xAF55e472Dc785f1613a346246E5B271Bf233219E",
+    },
   });
   const router = useRouter();
 
   const onSubmit = async (alphatwt) => {
-    const { result: { id }, success } = await create(alphatwt)
+    const {
+      result: { id },
+      success,
+    } = await create(alphatwt);
     if (success) {
       router.push(`/p/${id}`);
     } else {
-      alert('There was an error!')
+      alert("There was an error!");
     }
   };
 
-
   return (
-    <Template showLeft extraHead={null} extraLink={<Link href={"/archive"}>previous alphatweets</Link>}>
-      {!code && <ConnectWallet />}
+    <Template
+      showLeft
+      extraHead={null}
+      extraLink={<Link href={"/archive"}>previous alphatweets</Link>}
+    >
+      {!code && (
+        <Grid container alignItems="center" style={{ margin: "2rem" }}>
+          <Grid item xs={12} lg={10}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <h2>Create your tweet & monetize it right at start.</h2>
+                <p>
+                  AlphaTweet enables you to token-gate your tweets & empower
+                  your followers to earn rewards.
+                </p>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <Grid
+                  container
+                  alignItems="center"
+                  justifyContent="center"
+                  style={{
+                    height: "528px",
+                    borderRadius: "8px",
+                    border: "solid black 1px",
+                  }}
+                >
+                  <Grid item>
+                    <Grid
+                      container
+                      justifyContent="center"
+                      direction="column"
+                      alignItems="center"
+                    >
+                      <Grid item>
+                        <Image
+                          src="/assets/walletLogo.png"
+                          alt="alphatwtLogo"
+                          width="241"
+                          height="138"
+                          layout="intrinsic"
+                        />
+                      </Grid>
+                      <Grid item>
+                        <p>Please connect wallet to get started</p>
+                      </Grid>
+                      <Grid item>
+                        <ConnectWallet />
+                      </Grid>
+                    </Grid>
+                  </Grid>
+                </Grid>
+              </Grid>
+            </Grid>
+          </Grid>
+        </Grid>
+      )}
       {code && (
         <form onSubmit={handleSubmit(onSubmit)}>
           <p>
             <label>
               Title:
-              <input
-                {...register("title", { required: true })}
-              />
+              <input {...register("title", { required: true })} />
             </label>
           </p>
           <p>

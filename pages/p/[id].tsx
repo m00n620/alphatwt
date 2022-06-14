@@ -18,7 +18,7 @@ export async function getServerSideProps(context) {
 }
 
 /**
- * TODO :
+ * TODO:
  * - add way to automatically render preview images!
  * @returns
  */

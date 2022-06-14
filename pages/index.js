@@ -48,12 +48,9 @@ const Home = () => {
   const router = useRouter();
 
   const onSubmit = async (alphatwt) => {
-    const {
-      result: { id },
-      success,
-    } = await create(alphatwt);
-    if (success) {
-      router.push(`/p/${id}`);
+    const { result, success } = await create(alphatwt)
+    if (success && result) {
+      router.push(`/p/${result.id}`);
     } else {
       alert("There was an error!");
     }

@@ -48,7 +48,7 @@ const Home = () => {
   const router = useRouter();
 
   const onSubmit = async (alphatwt) => {
-    const { result, success } = await create(alphatwt)
+    const { result, success } = await create(alphatwt);
     if (success && result) {
       router.push(`/p/${result.id}`);
     } else {
@@ -63,115 +63,157 @@ const Home = () => {
       extraLink={<Link href={"/archive"}>previous alphatweets</Link>}
     >
       {!code && (
-        <Grid container alignItems="center" style={{ margin: "2rem" }}>
-          <Grid item xs={12} lg={10}>
-            <Grid container spacing={3}>
-              <Grid item xs={12} md={4}>
-                <h2>Create your tweet & monetize it right at start.</h2>
-                <p>
-                  AlphaTweet enables you to token-gate your tweets & empower
-                  your followers to earn rewards.
-                </p>
+        <Grid
+          item
+          xs={8}
+          justifyContent="center"
+          alignItems="center"
+          style={{
+            height: "528px",
+            borderRadius: "8px",
+            border: "solid black 1px",
+          }}
+        >
+          <Grid item>
+            <Grid
+              container
+              justifyContent="center"
+              direction="column"
+              alignItems="center"
+            >
+              <Grid item>
+                <Image
+                  src="/assets/walletLogo.png"
+                  alt="alphatwtLogo"
+                  width="241"
+                  height="138"
+                  layout="intrinsic"
+                />
               </Grid>
-              <Grid item xs={12} md={8}>
-                <Grid
-                  container
-                  alignItems="center"
-                  justifyContent="center"
-                  style={{
-                    height: "528px",
-                    borderRadius: "8px",
-                    border: "solid black 1px",
-                  }}
-                >
-                  <Grid item>
-                    <Grid
-                      container
-                      justifyContent="center"
-                      direction="column"
-                      alignItems="center"
-                    >
-                      <Grid item>
-                        <Image
-                          src="/assets/walletLogo.png"
-                          alt="alphatwtLogo"
-                          width="241"
-                          height="138"
-                          layout="intrinsic"
-                        />
-                      </Grid>
-                      <Grid item>
-                        <p>Please connect wallet to get started</p>
-                      </Grid>
-                      <Grid item>
-                        <ConnectWallet />
-                      </Grid>
-                    </Grid>
-                  </Grid>
-                </Grid>
+              <Grid item>
+                <p>Please connect wallet to get started</p>
+              </Grid>
+              <Grid item>
+                <ConnectWallet />
               </Grid>
             </Grid>
           </Grid>
         </Grid>
       )}
       {code && (
-        <form onSubmit={handleSubmit(onSubmit)}>
-          <p>
-            <label>
-              Title:
-              <input {...register("title", { required: true })} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Preview:
-              <textarea {...register("preview", { required: true })} />
-            </label>
-          </p>
-          <p>
-            <label>
-              Content:
-              <textarea {...register("content", { required: true })} />
-            </label>
-          </p>
-
-          <p>
-            <label>
-              Network:
-              <Controller
-                required
-                control={control}
-                name="network"
-                render={({ field: { onChange, value, ref } }) => (
-                  <Select
-                    inputRef={ref}
-                    value={networks.find((opt) => opt.value == value)}
-                    onChange={(option) => onChange(option.value)}
-                    options={networks}
-                  />
-                )}
-              />
-            </label>
-          </p>
-
-          <p>
-            <label>
-              Lock:
-              <input
-                placeholder="0x...."
-                {...register("lock", {
-                  required: true,
-                  validate: (value) => {
-                    return !!value.match(/^0x[a-fA-F0-9]{40}$/);
-                  },
-                })}
-              />
-            </label>
-          </p>
-          <p>
-            <input type="submit" />
-          </p>
-        </form>
+        <Grid
+          container
+          alignItems="center"
+          justifyContent="center"
+          style={{ margin: "2rem" }}
+          spacing={3}
+        >
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <hr />
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              spacing={3}
+            >
+              <Grid item xs={12} md={8}>
+                <p>
+                  <label>
+                    <h4>Title:</h4>
+                    <input {...register("title", { required: true })} />
+                  </label>
+                </p>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <p>
+                  <label>
+                    <h4>Content:</h4>
+                    <p>
+                      This content is what your follower will see after they
+                      unlock the tweet.
+                    </p>
+                    <textarea {...register("content", { required: true })} />
+                  </label>
+                </p>
+              </Grid>
+              <hr />
+            </Grid>
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              spacing={3}
+            >
+              <Grid item xs={12} md={8}>
+                <h4>Gated Setting:</h4>
+                <p>
+                  AlphaTweet is powered by Unlock Protocol- you will need to
+                  create a lock in order to gate this tweet. Launch Unlock
+                  Dashboard.
+                </p>
+                <p>
+                  <label>
+                    <p>Network of the Lock:</p>
+                    <Controller
+                      required
+                      control={control}
+                      name="network"
+                      render={({ field: { onChange, value, ref } }) => (
+                        <Select
+                          inputRef={ref}
+                          value={networks.find((opt) => opt.value == value)}
+                          onChange={(option) => onChange(option.value)}
+                          options={networks}
+                        />
+                      )}
+                    />
+                  </label>
+                </p>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <p>
+                  <label>
+                    <h4>Lock address:</h4>
+                    <input
+                      placeholder="0x...."
+                      {...register("lock", {
+                        required: true,
+                        validate: (value) => {
+                          return !!value.match(/^0x[a-fA-F0-9]{40}$/);
+                        },
+                      })}
+                    />
+                  </label>
+                </p>
+              </Grid>
+              <hr />
+            </Grid>
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              spacing={3}
+            >
+              <Grid item xs={12} md={8}>
+                <p>
+                  <label>
+                    <h4>Preview Text:</h4>
+                    <p>
+                      This is the preview text that will appear when your
+                      follower reshares your AlphaTweet.
+                    </p>
+                    <textarea {...register("preview", { required: true })} />
+                  </label>
+                </p>
+              </Grid>
+              <Grid item xs={12} md={8}>
+                <p>
+                  <input type="submit" value="Publish" />
+                </p>
+              </Grid>
+            </Grid>
+          </form>
+        </Grid>
       )}
     </Template>
   );

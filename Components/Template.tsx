@@ -6,6 +6,8 @@ import Home from "../Components/Home";
 import Link from "next/link";
 import classnames from "classnames";
 import Image from "next/image";
+import { Grid } from "@mui/material";
+import ConnectWallet from "./ConnectWallet";
 
 const Template = ({ showLeft, title, children, extraLink, extraHead }) => {
   return (
@@ -31,8 +33,21 @@ const Template = ({ showLeft, title, children, extraLink, extraHead }) => {
             </div>
           </header>
         )}
+        <Grid container alignItems="center" style={{ margin: "2rem" }}>
+          <Grid item xs={12} lg={10}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} md={4}>
+                <h2>Create your tweet & monetize it right at start.</h2>
+                <p>
+                  AlphaTweet enables you to token-gate your tweets & empower
+                  your followers to earn rewards.
+                </p>
+              </Grid>
+              {children}
+            </Grid>
+          </Grid>
+        </Grid>
         <MenuBar extraLink={extraLink} />
-        {children}
       </main>
     </div>
   );

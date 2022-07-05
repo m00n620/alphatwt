@@ -25,9 +25,9 @@ export const UnlockIt = ({ post }) => {
   };
 
   return (
-    <p>
-      <button onClick={unlockIt}>Unlock It</button>
-    </p>
+    <div>
+      <button className="w-full bg-gray text-white py-3 rounded-full" onClick={unlockIt}>Unlock It</button>
+    </div>
   );
 };
 

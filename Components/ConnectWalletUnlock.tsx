@@ -6,9 +6,9 @@ export const ConnectWallet = () => {
   };
 
   return (
-    <div className="border border-gray rounded-lg py-20 md:py-32 flex flex-col justify-center items-center">
+    <div className="flex flex-col justify-center items-center">
       <Image src="/images/wallet.svg" width={242} height={139} alt="wallet" />
-      <p className="text-lg my-6">Please connect wallet to get started</p>
+      <p className="text-lg my-6">Please connect wallet to unlock this tweet</p>
       <button
         className="bg-gray text-white font-bold py-3 px-14 rounded-full"
         onClick={connectWallet}

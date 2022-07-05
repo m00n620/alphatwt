@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from "react";
 import { AuthContext } from "../lib/contexts/auth";
 import getSigner from "../lib/getSigner";
+import { shortenAddress } from "../lib/utils";
 
 const MenuBar = ({ extraLink }) => {
   const { code, disconnect } = useContext(AuthContext);
@@ -11,15 +12,16 @@ const MenuBar = ({ extraLink }) => {
     }
   }, [code]);
 
-  return (
-    <footer>
-      {code && (
-        <>
-          Connected as {signer} <button onClick={disconnect}>x</button> &nbsp;
-          {extraLink}
-        </>
-      )}
-    </footer>
+  return code ? (
+    <header className="bg-gray-100 p-2 rounded-lg text-sm flex justify-between">
+      <div className="flex">
+        <div className="font-semibold">Wallet connected</div>
+        <div className="ml-2">{shortenAddress(signer)}</div>
+      </div>
+      <div className="font-semibold">{extraLink}</div>
+    </header>
+  ) : (
+    <></>
   );
 };
 

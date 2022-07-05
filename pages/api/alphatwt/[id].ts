@@ -40,14 +40,15 @@ async function handle(req, res) {
     return res.json(alphaTwt);
   }
 
-  const hasMembership = await isMember(
-    alphaTwt.network,
-    alphaTwt.lock,
-    req.signer
-  );
+  let hasMembership = false;
+  try {
+    hasMembership = await isMember(alphaTwt.network, alphaTwt.lock, req.signer);
+  } catch (err) {
+    console.log(err);
+  }
 
   if (!hasMembership) {
-    delete alphaTwt.content;
+    // delete alphaTwt.content;
     return res.json(alphaTwt);
   }
 

@@ -16,11 +16,11 @@ const providerUrl = (network: number) => {
     case 137:
       return "https://polygon-rpc.com/";
     case 4:
-      return "https://rinkeby-light.eth.linkpool.io";
+      return "https://rinkeby.infura.io/v3/60a59e7cfd904a778a07088806d7f09e";
     case 1:
       return "https://cloudflare-eth.com";
     case 100:
-      return "https://rpc.xdaichain.com/";
+      return "https://rpc.gnosischain.com";
     default:
       throw new Error("Invalid Network!");
   }

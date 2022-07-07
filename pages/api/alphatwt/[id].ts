@@ -48,7 +48,7 @@ async function handle(req, res) {
   }
 
   if (!hasMembership) {
-    // delete alphaTwt.content;
+    delete alphaTwt.content;
     return res.json(alphaTwt);
   }
 

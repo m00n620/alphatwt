@@ -19,7 +19,7 @@ const Home = () => {
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
       title: "",
-      preview: "This is the preview text",
+      preview: "",
       content: "This is the content",
       network: networks[0].value,
       lock: "0xAF55e472Dc785f1613a346246E5B271Bf233219E",

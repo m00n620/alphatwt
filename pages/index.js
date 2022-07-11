@@ -18,7 +18,7 @@ const Home = () => {
   const [route, setRoute] = useState();
   const { register, handleSubmit, control } = useForm({
     defaultValues: {
-      title: "Title",
+      title: "",
       preview: "This is the preview text",
       content: "This is the content",
       network: networks[0].value,

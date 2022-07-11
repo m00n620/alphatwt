@@ -16,7 +16,7 @@ const MenuBar = ({ extraLink }) => {
     <header className="bg-gray-100 p-2 rounded-lg text-sm flex justify-between">
       <div className="flex">
         <div className="font-semibold">Wallet connected</div>
-        <div className="ml-2">{shortenAddress(signer)}</div>
+        <div className="ml-2">{shortenAddress(signer)}&nsbp;<a onClick={disconnect} href="#">x</a></div>
       </div>
       <div className="font-semibold">{extraLink}</div>
     </header>

@@ -22,7 +22,7 @@ const Home = () => {
       preview: "",
       content: "",
       network: null,
-      lock: "0xAF55e472Dc785f1613a346246E5B271Bf233219E",
+      lock: null,
     },
   });
   const router = useRouter();

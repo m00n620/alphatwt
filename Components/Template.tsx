@@ -14,7 +14,7 @@ const Template = ({ title, children, extraHead }) => {
       <AsciiHeader />
       <main className="mt-8 md:mt-20 mb-40">{children}</main>
       <footer className="text-center text-sm mb-4">
-        Alpha. Built by <span className="font-semibold">Unlock Protocol</span>
+        Alpha. Built by (and with!) <a className="font-semibold" href="https://unlock-protocol.com/">Unlock Protocol</span>
       </footer>
     </div>
   );

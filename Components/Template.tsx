@@ -15,7 +15,7 @@ const Template = ({ title, children, extraHead }) => {
       <main className="mt-8 md:mt-20 mb-40">{children}</main>
       <footer className="text-center text-sm mb-4">
         Alpha. Built by (and with!){" "}
-        <a className="font-semibold" href="https://unlock-protocol.com/">
+        <a className="font-semibold" target="_blank" rel="noopener noreferrer" href="https://unlock-protocol.com/">
           Unlock Protocol
         </a>
       </footer>

@@ -13,17 +13,17 @@ const MenuBar = ({ extraLink }) => {
   }, [code]);
 
   return code ? (
-    <header className="bg-gray-100 p-2 rounded-lg text-sm flex justify-between">
-      <div className="flex">
-        <div className="font-semibold">Wallet connected</div>
-        <div className="ml-2">
+    <header className="bg-gray-100 p-2 rounded-lg text-sm flex justify-between items-center">
+      <div className="flex flex-wrap">
+        <div className="font-semibold mr-2">Wallet connected</div>
+        <div>
           {shortenAddress(signer)}{" "}
           <a onClick={disconnect} href="#">
             &times;
           </a>
         </div>
       </div>
-      <div className="font-semibold">{extraLink}</div>
+      <div className="font-semibold whitespace-nowrap">{extraLink}</div>
     </header>
   ) : (
     <></>
